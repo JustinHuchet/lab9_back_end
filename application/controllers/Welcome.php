@@ -1,25 +1,20 @@
 <?php
-
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Welcome extends Application {
-
-	public function index()
+	function __construct()
 	{
-		$result = '';
-		$oddrow = true;
-		foreach ($this->categories->all() as $category)
-		{
-//			$viewparms = array(
-//				'direction' => ($oddrow ? 'left' : 'right')
-//			);
-//			$viewparms = array_merge($viewparms, $category);
-			$category->direction = ($oddrow ? 'left' : 'right');
-			$result .= $this->parser->parse('category-home', $category, true);
-			$oddrow = ! $oddrow;
-		}
-		$this->data['content'] = $result;
+		parent::__construct();
+		$this->load->model('Menu');
+		$this->data['pagetitle'] = 'Lab9Group2 (Backend)';
+	}
+	/**
+	 * Sets up the form and renders it.
+	 */
+	function index()
+	{
+		$this->load->helper('formfields');
+		$this->data['title'] = 'Lab9Group2 (Backend)';
+		$this->data['pagebody'] = 'welcome_message';
 		$this->render();
 	}
-
 }
